@@ -1,4 +1,3 @@
-package string;
 
 /*
  * Given a non-empty string s, you may delete at most one character. 
