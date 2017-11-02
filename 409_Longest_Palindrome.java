@@ -16,6 +16,10 @@ import java.util.Map;
  * from 2 "a"s from "aaa".
  */
 
+/*
+ * Hashmap.
+ */
+
 public class Longest_Palindrome {
 
 	public static void main(String[] args) {
