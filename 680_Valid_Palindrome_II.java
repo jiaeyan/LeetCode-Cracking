@@ -12,6 +12,10 @@
  * "upuu...uupucu".
  */
 
+/*
+ * Two pointers.
+ */
+
 public class Valid_Palindrome_II {
 
 	public static void main(String[] args) {
