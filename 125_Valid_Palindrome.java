@@ -9,6 +9,10 @@
  * For the purpose of this problem, we define empty string as valid palindrome.
  */
 
+/*
+ * Two pointers.
+ */
+
 public class Valid_Palindrome {
 
 	public static void main(String[] args) {
