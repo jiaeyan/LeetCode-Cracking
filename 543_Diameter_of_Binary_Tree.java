@@ -8,7 +8,6 @@ package binary_search_tree;
  */
 
 public class Diameter_of_Binary_Tree {
-	int max = 0;
 	
 	public class TreeNode {
 		 int val;
