@@ -19,7 +19,7 @@ public class Length_of_Last_Word {
 	 * we should minus 1 more.
 	 * "" returns 0
 	 * " " returns 0
-	 * "a " returns 1, note when no ' ' inside s, returns -1
+	 * "a " returns 1, note when no ' ' inside s, lastIndexOf(' ') returns -1
 	 */ 
 	public int lengthOfLastWord(String s) {
         return s.trim().length() - s.trim().lastIndexOf(' ') - 1;
