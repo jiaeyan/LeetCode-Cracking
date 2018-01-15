@@ -76,6 +76,9 @@ public class ReverseInteger {
 		return res;
 	}
 	
+	/*
+	 * The correct solution for this problem.
+	 */
 	public int reverse(int x) {
 		int res = 0;
 		
