@@ -77,20 +77,50 @@ public class LongestCommonPrefix {
 		return strs[0];
 	}
 	
+	
+	/*
+	 * Since the longest common prefix should exist amongst all strings,
+	 * it means we can pick any word pair and get their lcp. If the word
+	 * pair is from respectively the left and right part of the string array,
+	 * we get the lcp of the whole strings. The same idea applies to each
+	 * left and right part of the array, thus a recursive/divide and conquer
+	 * approach is also available.
+	 */
 	public String DividnConquer(String[] strs) {
 		if (strs == null || strs.length == 0) return "";
-		if (strs.length == 1) return strs[0];
-		return null;
+		return longestCommonPrefix(strs, 0, strs.length - 1);
 	}
 	
+	/*
+	 * l: the left index of the string array
+	 * r: the right index of the string array
+	 * l and r forms the whole length of the array, and we use them to divide
+	 * the array into two parts
+	 */
+	public String longestCommonPrefix(String[] strs, int l, int r) {
+		// this means the length of the array is 1
+		if(l == r) return strs[l]; 
+		String leftLCP = longestCommonPrefix(strs, l, (l+r)/2);
+		String rightLCP = longestCommonPrefix(strs, (l+r)/2 + 1, r);
+		return getPrefix(leftLCP, rightLCP);
+	}
+	
+	// a help function to compute the longest common prefix of a word pair
 	public String getPrefix(String s1, String s2) {
-		
+		for(int i = 0; i < s1.length() && i < s2.length(); i++) {
+			if(s1.charAt(i) != s2.charAt(i)) {
+				return s1.substring(0, i);
+			}
+		}
+		return s1.length() > s2.length() ? s2 : s1;
 	}
 	
 	public static void main(String[] args) {
 		LongestCommonPrefix lcp = new LongestCommonPrefix();
 		System.out.println(lcp.HorizontalScan(new String[]{"abcede", "abass", "abbgt"}));
 		System.out.println(lcp.VerticalScan(new String[]{"abcede", "abass", "abbgt"}));
+		System.out.println(lcp.DividnConquer(new String[]{"abcede", "abcadfegss", "abcbcgt"}));
+		System.out.println(lcp.DividnConquer(new String[]{"abcede"}));
 	}
 
 }
