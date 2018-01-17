@@ -85,6 +85,17 @@ public class LongestCommonPrefix {
 	 * we get the lcp of the whole strings. The same idea applies to each
 	 * left and right part of the array, thus a recursive/divide and conquer
 	 * approach is also available.
+	 * 
+	 * Complexity Analysis
+	 * In the worst case we have n equal strings with length m
+	 * Time complexity : O(S), where S is the number of all characters in the array, 
+	 *                   S=m∗n Time complexity is T(n)=2T(2n)+O(m). Therefore time complexity is 
+	 *                   O(S). In the best case this algorithm performs O(minLen∗n) comparisons,
+	 *                   where minLen is the shortest string of the array
+	 * Space complexity : O(m∗log(n))
+	 * 
+	 * There is a memory overhead since we store recursive calls in the execution stack. There are log(n) recursive calls, 
+	 * each store need m space to store the result, so space complexity is O(m∗log(n))
 	 */
 	public String DividnConquer(String[] strs) {
 		if (strs == null || strs.length == 0) return "";
