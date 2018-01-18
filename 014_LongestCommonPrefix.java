@@ -79,6 +79,8 @@ public class LongestCommonPrefix {
 	
 	
 	/*
+	 * Divide and conquer comparison.
+	 * 
 	 * Since the longest common prefix should exist amongst all strings,
 	 * it means we can pick any word pair and get their lcp. If the word
 	 * pair is from respectively the left and right part of the string array,
@@ -126,12 +128,73 @@ public class LongestCommonPrefix {
 		return s1.length() > s2.length() ? s2 : s1;
 	}
 	
+	
+	/*
+	 * Binary search on one string.
+	 * 
+	 * Find the shortest string amongst the strings (so it won't take
+	 * too many rounds to iterate over the rest strings over and over again).
+	 * find its middle by setting left and right boundaries, and by this separate
+	 * the string into two parts.
+	 * If the left part appears in all rest strings,it may be longer, so move
+	 * the left boundary to middle, keep the same procedure; if it doesn't,
+	 * the lcp may be inside the left part, so move the right boundary to middle,
+	 * and keep the same procedure...
+	 * 
+	 * Complexity Analysis
+	 * In the worst case we have n equal strings with length m.
+	 * 
+	 * Time complexity : O(S∗log(n)), where S is the sum of all characters in all strings.
+	 * The algorithm makes log(n) iterations, for each of them there are 
+	 * S=m∗n comparisons, which gives in total O(S∗log(n)) time complexity.
+	 * 
+	 * Space complexity : O(1).
+	 */
+	public String BinarySearch(String[] strs) {
+		if (strs == null || strs.length == 0) return "";
+		
+		// find the string with min length
+		String minstr = strs[0];
+		for(String str:strs) {
+			if (minstr.length() > str.length()) {
+				minstr = str;
+			}
+		}
+		
+		// set the left and right boundaries to find middle
+		int l = 0;
+		int r = minstr.length()-1;
+		
+		while(l <= r) {
+			int mid = (l+r)/2;
+			// check if current prefix appears in every other string
+			if(isCommonPrefix(strs, minstr, minstr.substring(0, mid+1))) {
+				l = mid + 1;
+			}
+			else
+				r = mid - 1;
+		}
+		
+		return minstr.substring(0, (l+r)/2);
+	}
+	
+	public boolean isCommonPrefix(String[] strs, String minstr, String prefix) {
+		for(String str:strs) {
+			if (!str.equals(minstr)) {
+				if (!str.startsWith(prefix))
+					return false;
+			}
+		}
+		return true;
+	}
+	
 	public static void main(String[] args) {
 		LongestCommonPrefix lcp = new LongestCommonPrefix();
 		System.out.println(lcp.HorizontalScan(new String[]{"abcede", "abass", "abbgt"}));
 		System.out.println(lcp.VerticalScan(new String[]{"abcede", "abass", "abbgt"}));
 		System.out.println(lcp.DividnConquer(new String[]{"abcede", "abcadfegss", "abcbcgt"}));
-		System.out.println(lcp.DividnConquer(new String[]{"abcede"}));
+		System.out.println(lcp.BinarySearch(new String[]{"abcede", "abcadfegss", "abcbcgt"}));
+		System.out.println(lcp.BinarySearch(new String[]{"abcede"}));
 	}
 
 }
