@@ -20,7 +20,7 @@ public class MoveZeroes {
 	// moves fast to target the item that is not 0.
 	// Every time the left pointer is a 0, find the non-0, swap, both
 	// move on by 1; otherwise, just both move on by 1.
-	public void moveZeroes(int[] nums) {
+	public void naive(int[] nums) {
         if(nums.length == 1 || nums.length == 0) return;
         int l = 0;
         int r = 1;
@@ -38,6 +38,26 @@ public class MoveZeroes {
         	    r++;
         }
     }
+	
+	
+	
+	
+	// lastNonZeroFoundAt records the slow pointer, while cur is the fast pointer.
+	// move cur, if not 0, put it at the lastNonZeroFoundAt, and move lastNonZeroFoundAt
+	// by 1; otherwise, keep move cur and lastNonZeroFoundAt is untouched.
+	public void moveZeroes(int[] nums) {
+		for (int lastNonZeroFoundAt = 0, cur = 0; cur < nums.length; cur++) {
+	        if (nums[cur] != 0) {
+	            swap(nums, lastNonZeroFoundAt++, cur);
+	        }
+	    }
+	}
+	
+	public void swap(int[] nums, int i, int j) {
+		int temp = nums[i];
+		nums[i] = nums[j];
+		nums[j] = temp;
+	}
 	
 	public static void main(String[] args) {
 		MoveZeroes mz = new MoveZeroes();
