@@ -42,6 +42,9 @@ public class MaximumSubarray {
 	 * the next max subarrays at each position are [4, -1], [4, -1, 2], [4, -1, 2, 1], [4, -1, 2, 1, -5],
 	 * [4, -1, 2, 1, -5, 4], with local values of 3, 5, 6, 1, 5, so among all these local values,
 	 * the global max is 6.
+	 * 
+	 * In particular, every max subarray must not start with negative item, because this makes the sum smaller;
+	 * also any continuous items in a max subarray must sum to positive, otherwise it makes the sum smaller.
 	 */
 	public int Kadane(int[] nums) {
 		if (nums.length == 0) return 0;
