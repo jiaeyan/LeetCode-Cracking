@@ -41,7 +41,7 @@ public class MaximumSubarray {
 	 * item, because (local + new item) < new item.
 	 * the next max subarrays at each position are [4, -1], [4, -1, 2], [4, -1, 2, 1], [4, -1, 2, 1, -5],
 	 * [4, -1, 2, 1, -5, 4], with local values of 3, 5, 6, 1, 5, so among all these local values,
-	 * the max is 6.
+	 * the global max is 6.
 	 */
 	public int Kadane(int[] nums) {
 		if (nums.length == 0) return 0;
