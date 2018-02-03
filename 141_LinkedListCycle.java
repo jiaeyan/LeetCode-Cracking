@@ -19,6 +19,20 @@ public class LinkedListCycle {
 	 * at each time, if there is a cycle, they will finally meet;
 	 * if no, the fast one will reach the end first.
 	 * 
+	 * For a cycle in a linked list, the only possible case is below:
+	 * 
+	 *      5 <- 4
+	 *      |    ^
+	 *      v    |
+	 * 1 -> 2 -> 3
+	 * 
+	 * Case below will never happen, because node 3 can only have 1 next field:
+	 * 
+	 *      5 <- 4
+	 *      |    ^
+	 *      v    |
+	 * 1 -> 2 -> 3 -> 6
+	 * 
 	 * Time complexity : O(n). Let us denote n as the total number of nodes 
 	 * in the linked list. To analyze its time complexity, we consider the following two cases separately.
 	 * 
