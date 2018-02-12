@@ -18,24 +18,36 @@ public class RotateArray {
 	
 	// Swap the last k elements with the first k elements (even if they are across). 
     // The last k elements will be in the correct positions
-    // but we need to rotate the remaining (n - k) elements 
-    // to the right by k steps.
+    // and then rotate the remaining (n - k) elements. E.G.:
+	// when doing later one swap, the length of array that
+    // needs to be shifted shrinks by k, and start point moves on by k
+	// thus the value k changes when the remaining length value changes,
+	// because with shrink of length, k may be larger than length, at this
+	// point, wrap k around by k = k % length
+	// [1, 2, 3, 4, 5, 6, 7, 8] --> rotate 3 to right, length = 8, start = 0, k = 3
+	// [6, 7, 8,] 4, 5, [1, 2, 3] --> swap first 3 with last 3, length = 5, start = 3, k = 3
+	// 6, 7, 8, [1, 5, [4], 2, 3] --> swap second 3 with last 3 (even across)
+	// ...
+	// 6, 7, 8, [1, 2, [3], 5, 4] --> the result of second swap, length = 2, start = 6, k = 1
+	// 6, 7, 8, 1, 2, 3, [4], [5] --> the last swap, length = 1, start = 7, k = 1
+	// for next loop, k = k % length = 1 % 1 = 0, means no need to shift, stop here
 	 public void swap(int nums[], int k) {
 		    int n = nums.length;
-		    k=k%n;
-		    for (int start=0; start<nums.length && k!=0 ; k = k%n){
+		    int end = nums.length;
+		    k = k % n;
+		    for (int start = 0; start < end && k != 0 ; k = k % n){
 		        for (int i = 0; i < k; i++) {
-		            swapHelper(nums, start+i, nums.length-k+i);
+		            swapHelper(nums, start + i, end - k + i);
 		        }
-		        n=n-k;
-		        start=start+k;
+		        n -= k;
+		        start += k;
 		    }
 		 }
 
 		private void swapHelper(int[] nums, int a, int b){
 		    int temp = nums[b];
-		    nums[b]= nums[a];
-		    nums[a]=temp;
+		    nums[b] = nums[a];
+		    nums[a] =temp;
 		}
 	
 	
@@ -83,7 +95,7 @@ public class RotateArray {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-// there are more approaches
+
 	}
 
 }
