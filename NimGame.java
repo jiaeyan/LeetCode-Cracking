@@ -1,0 +1,43 @@
+package brainteaser;
+/*
+ * You are playing the following Nim Game with your friend: 
+ * There is a heap of stones on the table, each time one of 
+ * you take turns to remove 1 to 3 stones. The one who removes 
+ * the last stone will be the winner. You will take the first 
+ * turn to remove the stones.
+ * 
+ * Both of you are very clever and have optimal strategies 
+ * for the game. Write a function to determine whether you 
+ * can win the game given the number of stones in the heap.
+ * 
+ * For example, if there are 4 stones in the heap, then you 
+ * will never win the game: no matter 1, 2, or 3 stones you 
+ * remove, the last stone will always be removed by your friend.
+ */
+public class NimGame {
+	
+	// if there are 1, 2, 3 stones, you win;
+	// if there are 4 stones, whatever how many you take, you lose;
+	// if there are 5 stones, you take 1 first, you will always win;
+	// if there are 6 stones, you take 2 first, you will always win;
+	// if there are 7 stones, you take 3 first, you will always win;
+	// if there are 8 stones, you will lose;
+	// if there are 9 stones, you take 1 first, 
+	// -- if friend takes 1, 7 left, and you know you will win;
+	// -- if friend takes 2, 6 left, and you know you will win;
+	// -- if friend takes 3, 5 left, and you know you will win;
+	// if there are 10 stones, you take 2 first,
+	// -- if friend takes 1, 7 left, and you know you will win;
+	// -- if friend takes 2, 6 left, and you know you will win;
+	// -- if friend takes 3, 5 left, and you know you will win;
+	// if there are 11 stones, you take 3 first,
+	// -- if friend takes 1, 7 left, and you know you will win;
+	// -- if friend takes 2, 6 left, and you know you will win;
+	// -- if friend takes 3, 5 left, and you know you will win;
+	// if there are 12 stones, you will lose.
+	// ...
+	public boolean canWinNim(int n) {
+        return (n % 4 != 0);
+    }
+
+}
